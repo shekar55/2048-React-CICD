@@ -52,22 +52,22 @@ pipeline{
         stage("Docker Build & Push"){
             steps{
                 script{
-                   withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
+                   withDockerRegistry(credentialsId: 'dockerHub', toolName: 'docker'){   
                        sh "docker build -t 2048 ."
-                       sh "docker tag 2048 sevenajay/2048:latest "
-                       sh "docker push sevenajay/2048:latest "
+                       sh "docker tag 2048 chandu5562/2048:latest "
+                       sh "docker push chandu5562/2048:latest "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image sevenajay/2048:latest > trivy.txt" 
+                sh "trivy image chandu5562/2048:latest > trivy.txt" 
             }
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name 2048 -p 3000:3000 sevenajay/2048:latest'
+                sh 'docker run -d --name 2048 -p 3000:3000 chandu5562/2048:latest'
             }
         }
         stage('Deploy to kubernets'){
