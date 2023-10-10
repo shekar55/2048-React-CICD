@@ -15,7 +15,7 @@ pipeline{
         }
         stage('Checkout from Git'){
             steps{
-                git branch: 'master', url: 'https://github.com/Aj7Ay/2048-React-CICD.git'
+                git branch: 'master', url: 'https://github.com/shekar55/2048-React-CICD.git'
             }
         }
         stage("Sonarqube Analysis "){
